@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-canvas font-body text-ink;
+}
+
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.82),
+    rgba(246, 249, 255, 0.7)
+  );
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  box-shadow: 0 25px 50px rgba(15, 29, 52, 0.12);
+}
+
+.floating-island {
+  border-radius: 36px;
+  border: 1px solid rgba(176, 138, 51, 0.24);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.78),
+    rgba(239, 229, 204, 0.48)
+  );
+  backdrop-filter: blur(36px);
+  box-shadow: 0 26px 52px rgba(15, 29, 52, 0.18);
+}
+
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgba(176, 138, 51, 0.5),
+    rgba(212, 184, 120, 0.45),
+    rgba(244, 231, 199, 0.85)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.glow-border:hover::before,
+.glow-border:focus-visible::before {
+  opacity: 1;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.orbital-gradient {
+  background-image: var(--orbital-gradient);
+}
+
+.animated-gradient {
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(214, 185, 112, 0.32),
+    rgba(243, 225, 191, 0.42),
+    rgba(176, 138, 51, 0.3),
+    rgba(214, 185, 112, 0.32)
+  );
+  animation: pulseGradient 16s ease-in-out infinite;
+  filter: blur(140px);
+  opacity: 0.35;
+}
+
+@keyframes pulseGradient {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.32;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.46;
+  }
+}
+
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+}
+
+.neon-divider {
+  background: linear-gradient(
+    90deg,
+    rgba(176, 138, 51, 0),
+    rgba(176, 138, 51, 0.55),
+    rgba(212, 184, 120, 0)
+  );
+}
+
+/* News headline ticker animation */
+@keyframes newsTickerScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.news-ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  width: max-content;
+  white-space: nowrap;
+  animation: newsTickerScroll 32s linear infinite;
+}
+
+.news-ticker-track:hover {
+  animation-play-state: paused;
+}
